@@ -1,5 +1,8 @@
-import { createStore, combineReducers, applyMiddleware } from 'redux';
-import { routerReducer, routerMiddleware } from 'react-router-redux';
+import { createStore, applyMiddleware } from 'redux';
+import { combineReducers, routerReducer } from 'redux-seamless-immutable';
+import { routerMiddleware } from 'react-router-redux';
+import { reducer as formReducer } from 'redux-form';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import createHistory from 'history/createBrowserHistory';
 
 import taskBoardReducer from '../reducers/task-board-reducer';
@@ -11,9 +14,10 @@ const middleware = routerMiddleware(history);
 const store = createStore(
   combineReducers({
     taskBoardReducer,
-    router: routerReducer
+    router: routerReducer,
+    form: formReducer
   }),
-  applyMiddleware(middleware)
+  composeWithDevTools(applyMiddleware(middleware))
 );
 
-export {store, history};
+export { store, history };

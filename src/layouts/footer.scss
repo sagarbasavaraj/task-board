@@ -1,0 +1,11 @@
+.l-footer {
+  position: fixed;
+  min-height: 50px;
+  bottom: 0;
+  z-index: 1030;
+  width: inherit;
+  .l-copyright {
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+}

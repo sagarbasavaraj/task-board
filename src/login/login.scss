@@ -1,0 +1,15 @@
+.l-login-container {
+  padding: 24px;
+  border-radius: 5px;
+  border: 1px solid #d8dee2;
+  font-size: 14px;
+  background-color: #fff;
+  &.l-signin,
+  &.l-signup {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 340px;
+    transform: translate(-50%, -50%);
+  }
+}
