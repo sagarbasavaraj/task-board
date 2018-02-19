@@ -27,6 +27,7 @@ const SignUp = ({ renderField, disableSignUpButton }) => (
       type="password"
       label="Password"
       placeholder="Password"
+      helpContent="Use at least one lowercase letter, one numeral, and seven characters."
     />
 
     <div>

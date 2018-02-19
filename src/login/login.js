@@ -2,7 +2,12 @@ import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
 import classnames from 'classnames';
 
-import { FormGroup, ControlLabel, FormControl } from 'react-bootstrap/lib';
+import {
+  FormGroup,
+  ControlLabel,
+  FormControl,
+  HelpBlock
+} from 'react-bootstrap/lib';
 
 import './login.css';
 import SignUp from './sign-up';
@@ -13,6 +18,7 @@ const renderField = ({
   label,
   type,
   placeholder,
+  helpContent,
   meta: { touched, error, warning }
 }) => (
   <FormGroup>
@@ -20,6 +26,7 @@ const renderField = ({
     <FormControl {...input} placeholder={placeholder} type={type} />
     {touched &&
       ((error && <span>{error}</span>) || (warning && <span>{warning}</span>))}
+    {helpContent ? <HelpBlock>{helpContent}</HelpBlock> : null}
   </FormGroup>
 );
 
