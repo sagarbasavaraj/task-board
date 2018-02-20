@@ -15,10 +15,10 @@ const Header = ({ push }) => (
       </Navbar.Header>
       <Navbar.Collapse>
         <Nav pullRight>
-          <NavItem eventKey={1} onClick={() => push('/login/signIn')}>
+          <NavItem eventKey={1} onClick={() => push('/login')}>
             Sign in
           </NavItem>
-          <NavItem eventKey={2} onClick={() => push('/login/signUp')}>
+          <NavItem eventKey={2} onClick={() => push('/join')}>
             Sign up
           </NavItem>
         </Nav>

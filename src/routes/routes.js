@@ -7,14 +7,16 @@ import { history } from '../store/store';
 
 import Layout from '../layouts/layout';
 import Home from '../home/home';
-import Login from '../login/login';
+import SignUp from '../login/sign-up';
+import SignIn from '../login/sign-in';
 
 const AppRoutes = () => (
   <ConnectedRouter history={history}>
     <Layout>
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route exact path="/login/:mode(signIn|signUp)" component={Login} />
+        <Route exact path="/join" component={SignUp} />
+        <Route exact path="/login" component={SignIn} />
       </Switch>
     </Layout>
   </ConnectedRouter>

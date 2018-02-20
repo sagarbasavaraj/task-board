@@ -1,7 +1,7 @@
 import React from 'react';
 
 import './home.css';
-import LoginForm from '../login/login';
+import SignUp from '../login/sign-up';
 
 import { Grid, Row, Col, Jumbotron } from 'react-bootstrap/lib';
 
@@ -11,12 +11,12 @@ const Home = () => (
       <Col xs={12}>
         <Jumbotron>
           <Row>
-            <Col xs={6}>
+            <Col md={7}>
               <h1>Welcome to Taskboard</h1>
               <p>Create and Mangae your tasks.</p>
             </Col>
-            <Col xs={6}>
-              <LoginForm showSignUp />
+            <Col sm={8} md={5}>
+              <SignUp />
             </Col>
           </Row>
         </Jumbotron>

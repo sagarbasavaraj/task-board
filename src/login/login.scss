@@ -1,15 +1,13 @@
-.l-login-container {
+.l-signin-container,
+.l-signup-container {
+  position: absolute;
   padding: 24px;
   border-radius: 5px;
+  top: 50%;
+  left: 50%;
+  width: 340px;
   border: 1px solid #d8dee2;
   font-size: 14px;
+  transform: translate(-50%, -50%);
   background-color: #fff;
-  &.l-signin,
-  &.l-signup {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 340px;
-    transform: translate(-50%, -50%);
-  }
 }

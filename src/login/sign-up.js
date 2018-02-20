@@ -1,47 +1,57 @@
-import React from 'react';
-import { Field } from 'redux-form';
+import React, { PureComponent } from 'react';
+import { Field, reduxForm } from 'redux-form';
 
 import { Button } from 'react-bootstrap/lib';
 
-const SignUp = ({ renderField, disableSignUpButton }) => (
-  <div>
-    <Field
-      name="name"
-      label="Username"
-      component={renderField}
-      type="text"
-      placeholder="Username"
-    />
+import './login.css';
+import RenderField from './render-field';
 
-    <Field
-      name="email"
-      component={renderField}
-      type="email"
-      label="Email"
-      placeholder="you@example.com"
-    />
+class SignUp extends PureComponent {
+  render() {
+    const { handleSubmit, pristine, submitting } = this.props;
+    return (
+      <div className="l-signup-container">
+        <form onSubmit={handleSubmit}>
+          <Field
+            name="name"
+            label="Username"
+            component={RenderField}
+            type="text"
+            placeholder="Username"
+          />
 
-    <Field
-      name="password"
-      component={renderField}
-      type="password"
-      label="Password"
-      placeholder="Password"
-      helpContent="Use at least one lowercase letter, one numeral, and seven characters."
-    />
+          <Field
+            name="email"
+            component={RenderField}
+            type="email"
+            label="Email"
+            placeholder="you@example.com"
+          />
 
-    <div>
-      <Button
-        type="submit"
-        bsStyle="primary"
-        disabled={disableSignUpButton}
-        bsSize="large"
-        block
-      >
-        Sign up for Taskboard
-      </Button>
-    </div>
-  </div>
-);
+          <Field
+            name="password"
+            component={RenderField}
+            type="password"
+            label="Password"
+            placeholder="Password"
+            helpContent="Use at least one lowercase letter, one numeral, and seven characters."
+          />
 
-export default SignUp;
+          <div>
+            <Button
+              type="submit"
+              bsStyle="primary"
+              disabled={pristine || submitting}
+              bsSize="large"
+              block
+            >
+              Sign up for Taskboard
+            </Button>
+          </div>
+        </form>
+      </div>
+    );
+  }
+}
+
+export default reduxForm({ form: 'SignUp' })(SignUp);
