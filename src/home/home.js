@@ -1,4 +1,5 @@
 import React from 'react';
+import { Header, Paragraph } from '../common';
 
 import './home.css';
 import SignUp from '../login/sign-up';
@@ -12,8 +13,8 @@ const Home = () => (
         <Jumbotron>
           <Row>
             <Col md={7}>
-              <h1>Welcome to Taskboard</h1>
-              <p>Create and Mangae your tasks.</p>
+              <Header msg="home:title" />
+              <Paragraph msg="home:subtitle" />
             </Col>
             <Col sm={8} md={5}>
               <SignUp />
