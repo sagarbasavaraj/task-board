@@ -1,10 +1,10 @@
+// @flow
 import React, { PureComponent } from 'react';
 import { Field, reduxForm } from 'redux-form';
 
-import { Button } from 'react-bootstrap/lib';
+import { Button, RenderField } from '../common';
 
 import './login.css';
-import RenderField from './render-field';
 
 class SignUp extends PureComponent {
   render() {
@@ -14,7 +14,7 @@ class SignUp extends PureComponent {
         <form onSubmit={handleSubmit}>
           <Field
             name="name"
-            label="Username"
+            label="login:userName"
             component={RenderField}
             type="text"
             placeholder="Username"
@@ -24,7 +24,7 @@ class SignUp extends PureComponent {
             name="email"
             component={RenderField}
             type="email"
-            label="Email"
+            label="login:email"
             placeholder="you@example.com"
           />
 
@@ -32,21 +32,20 @@ class SignUp extends PureComponent {
             name="password"
             component={RenderField}
             type="password"
-            label="Password"
+            label="login:password"
             placeholder="Password"
-            helpContent="Use at least one lowercase letter, one numeral, and seven characters."
+            helpContent="login:passwordHelpContent"
           />
 
           <div>
             <Button
+              msg="login:signUp"
               type="submit"
               bsStyle="primary"
               disabled={pristine || submitting}
               bsSize="large"
               block
-            >
-              Sign up for Taskboard
-            </Button>
+            />
           </div>
         </form>
       </div>

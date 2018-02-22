@@ -11,7 +11,7 @@ i18n
     fallbackLng: 'en',
     load: 'languageOnly',
     // have a common namespace used around the full app
-    ns: ['common', 'home'],
+    ns: ['common', 'home', 'login'],
     defaultNS: 'common',
 
     debug: true,

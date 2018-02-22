@@ -1,3 +1,10 @@
 {
-  "pageHeader": "Welcome to Taskboard"
+  "brand": "Taskboard",
+  "nav": {
+    "signInText": "Sign in",
+    "signUp": "Sign up"
+  },
+  "footer": {
+    "copyright": "2018"
+  }
 }

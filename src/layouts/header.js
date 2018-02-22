@@ -4,22 +4,26 @@ import { push } from 'react-router-redux';
 import { Navbar, NavItem, Nav } from 'react-bootstrap/lib';
 import { Link } from 'react-router-dom';
 
+import { Span } from '../common';
+
 const Header = ({ push }) => (
   <header>
     <Navbar inverse staticTop>
       <Navbar.Header>
         <Navbar.Brand>
-          <Link to="/">Taskboard</Link>
+          <Link to="/">
+            <Span msg="brand" />
+          </Link>
         </Navbar.Brand>
         <Navbar.Toggle />
       </Navbar.Header>
       <Navbar.Collapse>
         <Nav pullRight>
           <NavItem eventKey={1} onClick={() => push('/login')}>
-            Sign in
+            <Span msg="nav.signInText" />
           </NavItem>
           <NavItem eventKey={2} onClick={() => push('/join')}>
-            Sign up
+            <Span msg="nav.signUp" />
           </NavItem>
         </Nav>
       </Navbar.Collapse>

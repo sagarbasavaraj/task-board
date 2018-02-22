@@ -4,9 +4,7 @@ import { resolveDisplayText } from '../../helpers/resolveDisplayText';
 
 import withTranslate from '../with-translate';
 
-const Header = ({ t, text, msg, className }) => {
+export const Span = withTranslate(({ t, msg, text, className }) => {
   const displayText = resolveDisplayText(t, msg, text);
-  return <h1 className={className}>{displayText}</h1>;
-};
-
-export default withTranslate(Header);
+  return <span>{displayText}</span>;
+});

@@ -1,0 +1,10 @@
+{
+  "userName": "Username",
+  "email": "Email",
+  "password": "Password",
+  "userNameOrEmail": "Username or email address",
+  "signUp": "Sign up for Taskboard",
+  "signIn": "Sign in",
+  "passwordHelpContent":
+    "Use at least one lowercase letter, one numeral, and seven characters."
+}

@@ -1,10 +1,9 @@
 import React, { PureComponent } from 'react';
 import { reduxForm, Field } from 'redux-form';
-import { Button } from 'react-bootstrap/lib';
 
 import './login.css';
 
-import RenderField from './render-field';
+import { RenderField, Button } from '../common';
 
 class SignIn extends PureComponent {
   render() {
@@ -15,7 +14,7 @@ class SignIn extends PureComponent {
         <form onSubmit={handleSubmit}>
           <Field
             name="name"
-            label="Username or email address"
+            label="login:userNameOrEmail"
             component={RenderField}
             type="text"
           />
@@ -24,18 +23,17 @@ class SignIn extends PureComponent {
             name="password"
             component={RenderField}
             type="password"
-            label="Password"
+            label="login:password"
           />
           <div>
             <Button
+              msg="login:signIn"
               type="submit"
               bsStyle="primary"
               disabled={pristine || submitting}
               bsSize="large"
               block
-            >
-              Sign in
-            </Button>
+            />
           </div>
         </form>
       </div>

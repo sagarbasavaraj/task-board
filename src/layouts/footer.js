@@ -1,6 +1,7 @@
 import React from 'react';
 import { Grid, Glyphicon } from 'react-bootstrap/lib';
 
+import { Span } from '../common';
 import './footer.css';
 
 const Footer = () => (
@@ -8,7 +9,9 @@ const Footer = () => (
     <Grid>
       <div className="l-footer">
         <label className="l-copyright">
-          Taskboard <Glyphicon glyph="copyright-mark" />2018
+          <Span msg="brand" />
+          <Glyphicon glyph="copyright-mark" />
+          <Span msg="footer.copyright" />
         </label>
       </div>
     </Grid>
