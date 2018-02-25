@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
 
 import './index.css';
+import './firebase/firebase';
 import App from './App';
 import i18n from './i18n'; // initialized i18next instance
 

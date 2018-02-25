@@ -1,17 +1,28 @@
-// @flow
 import React, { PureComponent } from 'react';
 import { Field, reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
+
+import { signUpUser } from '../reducers/login-actions';
 
 import { Button, RenderField } from '../common';
 
 import './login.css';
 
 class SignUp extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.signUpUser = this.signUpUser.bind(this);
+  }
+
+  signUpUser(data) {
+    this.props.signUpUser(data);
+  }
+
   render() {
     const { handleSubmit, pristine, submitting } = this.props;
     return (
       <div className="l-signup-container">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit(this.signUpUser)}>
           <Field
             name="name"
             label="login:userName"
@@ -53,4 +64,6 @@ class SignUp extends PureComponent {
   }
 }
 
-export default reduxForm({ form: 'SignUp' })(SignUp);
+export default reduxForm({ form: 'SignUp' })(
+  connect(undefined, { signUpUser })(SignUp)
+);
