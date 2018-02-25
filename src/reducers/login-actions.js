@@ -3,7 +3,6 @@ import { push } from 'react-router-redux';
 
 const ns = 'login';
 
-const SIGNUP_SUCCESS = `${ns}.signUpSuccess`;
 const SIGNUP_FAILED = `${ns}.signUpFailed`;
 
 const signUpFailed = error => ({ type: SIGNUP_FAILED, error });
