@@ -1,13 +1,13 @@
 const INITIAL_STATE = {
-    
+  tasks: {}
 };
 
-const taskBoardReducer = (state = INITIAL_STATE, action) => {
-    switch(action.type) {
-      default: {
-          return state;
-      }     
+const taskboardReducer = (state = INITIAL_STATE, action) => {
+  switch (action.type) {
+    default: {
+      return state;
     }
+  }
 };
 
-export default taskBoardReducer;
+export default taskboardReducer;

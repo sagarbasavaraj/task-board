@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 
-import { signUpUser } from '../reducers/login-actions';
+import { signUpUser } from '../reducers/actions/login-actions';
 
 import { Button, RenderField } from '../common';
 

@@ -7,8 +7,8 @@ import 'bootstrap/dist/css/bootstrap-theme.css';
 
 import './index.css';
 import './firebase/firebase';
-import App from './App';
-import i18n from './i18n'; // initialized i18next instance
+import App from './init/App';
+import i18n from './init/i18n'; // initialized i18next instance
 
 import registerServiceWorker from './registerServiceWorker';
 

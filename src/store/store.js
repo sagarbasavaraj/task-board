@@ -6,7 +6,7 @@ import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import createHistory from 'history/createBrowserHistory';
 
-import taskBoardReducer from '../reducers/task-board-reducer';
+import { reducers } from '../reducers';
 
 const history = createHistory();
 
@@ -14,11 +14,10 @@ const middlewares = [routerMiddleware(history), thunk];
 
 const store = createStore(
   combineReducers({
-    taskBoardReducer,
+    ...reducers,
     router: routerReducer,
     form: formReducer
   }),
-  //applyMiddleware(middleware)
   composeWithDevTools(applyMiddleware(...middlewares))
 );
 

@@ -17,6 +17,11 @@ const AppRoutes = () => (
         <Route exact path="/" component={Home} />
         <Route exact path="/join" component={SignUp} />
         <Route exact path="/login" component={SignIn} />
+        <Route
+          exact
+          path="/taskboard"
+          component={() => <div>Coming soon...</div>}
+        />
       </Switch>
     </Layout>
   </ConnectedRouter>
