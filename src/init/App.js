@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import { push } from 'react-router-redux';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import { firebase } from '../firebase/firebase';
 import { store } from '../store/store';
@@ -13,11 +14,12 @@ class App extends Component {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         // User is signed in.
-        store.dispatch(onSignIn(user.uid));
+        store.dispatch(onSignIn(user));
         store.dispatch(push('/taskboard'));
       } else {
         // No user is signed in.
         store.dispatch(onSignOut());
+        store.dispatch(push('/'));
       }
     });
   }
@@ -25,7 +27,9 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <AppRoutes />
+        <MuiThemeProvider>
+          <AppRoutes />
+        </MuiThemeProvider>
       </Provider>
     );
   }

@@ -12,7 +12,10 @@ const loginReducer = (state = INITIAL_STATE, action) => {
 
   switch (type) {
     case ON_SIGN_IN: {
-      return state.setIn(['user', 'uid'], payload.uid);
+      const { user } = payload;
+      return state
+        .setIn(['user', 'uid'], user.uid)
+        .setIn(['user', 'email'], user.email);
     }
     case ON_SIGN_OUT: {
       return state.setIn(['user'], {});

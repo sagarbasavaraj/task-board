@@ -1,0 +1,14 @@
+header {
+  .l-user-info {
+    float: right;
+    .l-user-img {
+      padding: 10px;
+    }
+    .l-user-email {
+      color: #ffffff;
+      padding: 0 0 0px 12px;
+      display: inline-flex;
+      vertical-align: text-bottom;
+    }
+  }
+}

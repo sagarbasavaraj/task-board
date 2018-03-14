@@ -2,7 +2,8 @@
   "brand": "Taskboard",
   "nav": {
     "signInText": "Sign in",
-    "signUp": "Sign up"
+    "signUp": "Sign up",
+    "logout": "Logout"
   },
   "footer": {
     "copyright": "2018"

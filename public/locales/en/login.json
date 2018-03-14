@@ -2,7 +2,6 @@
   "userName": "Username",
   "email": "Email",
   "password": "Password",
-  "userNameOrEmail": "Username or email address",
   "signUp": "Sign up for Taskboard",
   "signIn": "Sign in",
   "passwordHelpContent":
