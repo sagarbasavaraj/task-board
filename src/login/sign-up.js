@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 
-import { signUpUser } from '../reducers/actions/login-actions';
+import { signUpUser, clearError } from '../reducers/actions/login-actions';
 
 import { Button, RenderField } from '../common';
 
@@ -14,21 +14,32 @@ class SignUp extends PureComponent {
     this.signUpUser = this.signUpUser.bind(this);
   }
 
+  componentWillUnmount() {
+    this.props.clearError();
+  }
+
   signUpUser(data) {
     this.props.signUpUser(data);
   }
 
   render() {
-    const { handleSubmit, pristine, submitting } = this.props;
+    const {
+      handleSubmit,
+      pristine,
+      submitting,
+      authError,
+      clearError
+    } = this.props;
     return (
       <div className="l-signup-container">
-        <form onSubmit={handleSubmit(this.signUpUser)}>
+        <form onSubmit={handleSubmit(this.signUpUser)} autoComplete="off">
           <Field
             name="name"
             label="login:userName"
             component={RenderField}
             type="text"
             placeholder="Username"
+            errorMsg={authError.name}
           />
 
           <Field
@@ -36,7 +47,9 @@ class SignUp extends PureComponent {
             component={RenderField}
             type="email"
             label="login:email"
+            onChange={clearError}
             placeholder="you@example.com"
+            errorMsg={authError.email}
           />
 
           <Field
@@ -45,17 +58,19 @@ class SignUp extends PureComponent {
             type="password"
             label="login:password"
             placeholder="Password"
+            onChange={clearError}
             helpContent="login:passwordHelpContent"
+            errorMsg={authError.password}
           />
 
           <div>
             <Button
+              className="l-button"
               msg="login:signUp"
               type="submit"
-              bsStyle="primary"
+              primary
               disabled={pristine || submitting}
-              bsSize="large"
-              block
+              fullWidth
             />
           </div>
         </form>
@@ -65,5 +80,8 @@ class SignUp extends PureComponent {
 }
 
 export default reduxForm({ form: 'SignUp' })(
-  connect(undefined, { signUpUser })(SignUp)
+  connect(state => ({ authError: state.login.authError || {} }), {
+    signUpUser,
+    clearError
+  })(SignUp)
 );

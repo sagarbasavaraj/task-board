@@ -37,7 +37,7 @@ class Header extends PureComponent {
         <Navbar inverse staticTop onSelect={this.navigate}>
           <Navbar.Header>
             <Navbar.Brand>
-              <Link to="/">
+              <Link to={isEmpty(user) ? '/' : '/taskboard'}>
                 <Span msg="brand" />
               </Link>
             </Navbar.Brand>

@@ -1,15 +1,11 @@
 import React from 'react';
+import TextField from 'material-ui/TextField';
 
 import { resolveDisplayText } from '../helpers/resolveDisplayText';
 
 import withTranslate from './with-translate';
 
-import {
-  FormGroup,
-  ControlLabel,
-  FormControl,
-  HelpBlock
-} from 'react-bootstrap/lib';
+import { HelpBlock } from 'react-bootstrap/lib';
 
 const renderField = ({
   t,
@@ -19,21 +15,24 @@ const renderField = ({
   type,
   placeholder,
   helpContent,
+  errorMsg,
   meta: { touched, error, warning }
 }) => {
-  const controlLabel = resolveDisplayText(t, label, text);
+  const resolveErrorMsg = resolveDisplayText(t, errorMsg);
+  const floatingLabelText = resolveDisplayText(t, label, text);
   const translatedHelpContent = resolveDisplayText(t, helpContent);
   return (
-    <FormGroup>
-      <ControlLabel>{controlLabel}</ControlLabel>
-      <FormControl {...input} placeholder={placeholder} type={type} />
-      {touched &&
-        ((error && <span>{error}</span>) ||
-          (warning && <span>{warning}</span>))}
+    <div>
+      <TextField
+        {...input}
+        type={type}
+        errorText={error || resolveErrorMsg}
+        floatingLabelText={floatingLabelText}
+      />
       {translatedHelpContent ? (
         <HelpBlock>{translatedHelpContent}</HelpBlock>
       ) : null}
-    </FormGroup>
+    </div>
   );
 };
 

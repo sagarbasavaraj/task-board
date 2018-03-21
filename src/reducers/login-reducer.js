@@ -1,6 +1,6 @@
 import { loginActionTypes } from './actions/types';
 
-const { AUTH_ERROR, ON_SIGN_IN, ON_SIGN_OUT } = loginActionTypes;
+const { AUTH_ERROR, ON_SIGN_IN, ON_SIGN_OUT, CLEAR_ERROR } = loginActionTypes;
 
 const INITIAL_STATE = {
   user: {},
@@ -15,13 +15,17 @@ const loginReducer = (state = INITIAL_STATE, action) => {
       const { user } = payload;
       return state
         .setIn(['user', 'uid'], user.uid)
-        .setIn(['user', 'email'], user.email);
+        .setIn(['user', 'email'], user.email)
+        .setIn(['authError'], null);
     }
     case ON_SIGN_OUT: {
       return state.setIn(['user'], {});
     }
     case AUTH_ERROR: {
       return state.setIn(['authError'], payload.error);
+    }
+    case CLEAR_ERROR: {
+      return state.setIn(['authError'], null);
     }
     default:
       return state;

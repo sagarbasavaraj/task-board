@@ -5,5 +5,10 @@
   "signUp": "Sign up for Taskboard",
   "signIn": "Sign in",
   "passwordHelpContent":
-    "Use at least one lowercase letter, one numeral, and seven characters."
+    "Use at least one lowercase letter, one numeral, and seven characters.",
+  "emailInUse": "Email already exist",
+  "invalidEmail": "Invalid email",
+  "weakPassword": "Weak password",
+  "userNotFound": "User not found",
+  "wrongPassword": "Wrong Password. Please try again."
 }
