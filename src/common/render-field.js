@@ -18,7 +18,7 @@ const renderField = ({
   errorMsg,
   meta: { touched, error, warning }
 }) => {
-  const resolveErrorMsg = resolveDisplayText(t, errorMsg);
+  const resolvedErrorMsg = resolveDisplayText(t, errorMsg);
   const floatingLabelText = resolveDisplayText(t, label, text);
   const translatedHelpContent = resolveDisplayText(t, helpContent);
   return (
@@ -26,7 +26,7 @@ const renderField = ({
       <TextField
         {...input}
         type={type}
-        errorText={error || resolveErrorMsg}
+        errorText={error || resolvedErrorMsg}
         floatingLabelText={floatingLabelText}
       />
       {translatedHelpContent ? (
