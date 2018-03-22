@@ -10,5 +10,6 @@
   "invalidEmail": "Invalid email",
   "weakPassword": "Weak password",
   "userNotFound": "User not found",
-  "wrongPassword": "Wrong Password. Please try again."
+  "wrongPassword": "Wrong Password. Please try again.",
+  "required": "Required"
 }

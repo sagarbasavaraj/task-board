@@ -1,12 +1,14 @@
 import React, { PureComponent } from 'react';
-import { reduxForm, Field } from 'redux-form';
+import { reduxForm, Field, SubmissionError } from 'redux-form';
 import { connect } from 'react-redux';
+import { isEmpty } from 'lodash';
 
 import { signInUser, clearError } from '../reducers/actions/login-actions';
 
 import './login.css';
 
 import { RenderField, Button } from '../common';
+import { emailVaidator, validateForm } from './validation';
 
 class SignIn extends PureComponent {
   constructor(props) {
@@ -19,7 +21,12 @@ class SignIn extends PureComponent {
   }
 
   handleSignIn(userCredentials) {
-    this.props.signInUser(userCredentials);
+    const errors = validateForm(userCredentials);
+    if (isEmpty(errors)) {
+      this.props.signInUser(userCredentials);
+    } else {
+      throw new SubmissionError(errors);
+    }
   }
 
   render() {
@@ -41,6 +48,7 @@ class SignIn extends PureComponent {
             type="text"
             onChange={clearError}
             errorMsg={authError.email}
+            validate={[emailVaidator]}
           />
 
           <Field
