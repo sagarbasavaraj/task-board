@@ -6,7 +6,7 @@ import { Container, Icon } from '../common';
 
 import { taskboardActions } from '../reducers/actions/taskboard-actions';
 
-import CreateTask from './create-task';
+import AddTask from './add-task';
 import './taskboard.css';
 
 class Taskboard extends Component {
@@ -21,12 +21,12 @@ class Taskboard extends Component {
     return (
       <Container>
         <Icon
-          className="align-right"
+          className="l-add-icon"
           name="add_circle"
           onClick={toggleCreateTaskDialog}
-          style={{ fontSize: '48px', display: 'flex' }}
+          style={{ fontSize: '48px' }}
         />
-        <CreateTask
+        <AddTask
           open={openCreateTaskDialog}
           closeDialog={toggleCreateTaskDialog}
         />

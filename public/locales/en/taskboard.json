@@ -1,3 +1,5 @@
 {
-  "addTask": "Add Task"
+  "addTask": "Add Task",
+  "title": "Title",
+  "description": "Description"
 }

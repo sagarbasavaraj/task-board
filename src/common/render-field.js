@@ -16,7 +16,8 @@ const renderField = ({
   placeholder,
   helpContent,
   errorMsg,
-  meta: { touched, error, warning }
+  meta: { touched, error, warning },
+  ...restProps
 }) => {
   const resolvedErrorMsg = resolveDisplayText(t, error || errorMsg);
   const floatingLabelText = resolveDisplayText(t, label, text);
@@ -28,6 +29,7 @@ const renderField = ({
         type={type}
         errorText={touched && resolvedErrorMsg}
         floatingLabelText={floatingLabelText}
+        {...restProps}
       />
       {translatedHelpContent ? (
         <HelpBlock>{translatedHelpContent}</HelpBlock>
