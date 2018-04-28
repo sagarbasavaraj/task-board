@@ -7,7 +7,7 @@ import { signInUser, clearError } from '../reducers/actions/login-actions';
 
 import './login.css';
 
-import { RenderField, Button } from '../common';
+import { TextField, Button } from '../common';
 import { emailVaidator, validateForm } from './validation';
 
 class SignIn extends PureComponent {
@@ -44,7 +44,7 @@ class SignIn extends PureComponent {
           <Field
             name="email"
             label="login:email"
-            component={RenderField}
+            component={TextField}
             type="text"
             onChange={clearError}
             errorMsg={authError.email}
@@ -53,7 +53,7 @@ class SignIn extends PureComponent {
 
           <Field
             name="password"
-            component={RenderField}
+            component={TextField}
             type="password"
             label="login:password"
             onChange={clearError}

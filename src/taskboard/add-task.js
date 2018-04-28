@@ -2,7 +2,41 @@ import React, { PureComponent } from 'react';
 import { func, bool } from 'prop-types';
 import { reduxForm, Field } from 'redux-form';
 
-import { Button, Dialog, RenderField } from '../common';
+import { Button, Dialog, TextField, SelectField } from '../common';
+
+const priorityOptions = [
+  {
+    label: 'taskboard:high',
+    value: 'high'
+  },
+  {
+    label: 'taskboard:medium',
+    value: 'medium'
+  },
+  {
+    label: 'taskboard:low',
+    value: 'low'
+  }
+];
+
+const statusOptions = [
+  {
+    label: 'taskboard:new',
+    value: 'new'
+  },
+  {
+    label: 'taskboard:inProgress',
+    value: 'inProgress'
+  },
+  {
+    label: 'taskboard:review',
+    value: 'review'
+  },
+  {
+    label: 'taskboard:complete',
+    value: 'complete'
+  }
+];
 
 class AddTask extends PureComponent {
   static propTypes = {
@@ -10,45 +44,84 @@ class AddTask extends PureComponent {
     open: bool
   };
 
+  constructor(props) {
+    super(props);
+    this.handleCloseDialog = this.handleCloseDialog.bind(this);
+    this.handleSubmitBtnClick = this.handleSubmitBtnClick.bind(this);
+  }
+
+  componentWillUnmount() {
+    this.props.clearFields();
+    this.props.reset();
+  }
+
+  closeAndResetForm() {
+    this.props.closeDialog();
+    this.props.reset();
+  }
+
+  handleCloseDialog() {
+    this.closeAndResetForm();
+  }
+
+  handleSubmitBtnClick(taskData) {
+    console.log(taskData);
+    this.handleCloseDialog();
+    //call service and store the data
+  }
+
   render() {
-    const { closeDialog, open } = this.props;
+    const { open, pristine, submitting, handleSubmit } = this.props;
     const actions = [
       <Button
         msg="cancel"
         primary={true}
         btnType="flat"
-        onClick={closeDialog}
+        onClick={this.handleCloseDialog}
       />,
       <Button
         msg="submit"
         primary={true}
-        disabled={true}
-        onClick={closeDialog}
+        disabled={pristine || submitting}
         btnType="flat"
+        type="submit"
+        onClick={handleSubmit(this.handleSubmitBtnClick)}
       />
     ];
     return (
       <Dialog
         msg="taskboard:addTask"
         actions={actions}
-        modal
         open={open}
         autoScrollBodyContent
+        modal={false}
       >
         <form autoComplete="off">
           <Field
             name="title"
             fullWidth={true}
             label="taskboard:title"
-            component={RenderField}
+            component={TextField}
             type="text"
+          />
+          <Field
+            name="priority"
+            label="taskboard:priority"
+            component={SelectField}
+            menuItems={priorityOptions}
+          />
+          <Field
+            name="status"
+            label="taskboard:status"
+            component={SelectField}
+            menuItems={statusOptions}
           />
           <Field
             name="description"
             fullWidth
             multiLine
             label="taskboard:description"
-            component={RenderField}
+            component={TextField}
             type="text"
             rowsMax={10}
           />

@@ -12,24 +12,21 @@ import './taskboard.css';
 class Taskboard extends Component {
   static propTypes = {
     taskboard: object.isRequired,
-    toggleCreateTaskDialog: func.isRequired
+    toggleAddTaskDialog: func.isRequired
   };
 
   render() {
-    const { taskboard, toggleCreateTaskDialog } = this.props;
-    const { openCreateTaskDialog } = taskboard;
+    const { taskboard, toggleAddTaskDialog } = this.props;
+    const { openAddTaskDialog } = taskboard;
     return (
       <Container>
         <Icon
           className="l-add-icon"
           name="add_circle"
-          onClick={toggleCreateTaskDialog}
+          onClick={toggleAddTaskDialog}
           style={{ fontSize: '48px' }}
         />
-        <AddTask
-          open={openCreateTaskDialog}
-          closeDialog={toggleCreateTaskDialog}
-        />
+        <AddTask open={openAddTaskDialog} closeDialog={toggleAddTaskDialog} />
       </Container>
     );
   }

@@ -5,7 +5,7 @@ import { isEmpty } from 'lodash';
 
 import { signUpUser, clearError } from '../reducers/actions/login-actions';
 
-import { Button, RenderField } from '../common';
+import { Button, TextField } from '../common';
 import { emailVaidator, passwordValidator, validateForm } from './validation';
 
 import './login.css';
@@ -43,7 +43,7 @@ class SignUp extends PureComponent {
           <Field
             name="name"
             label="login:userName"
-            component={RenderField}
+            component={TextField}
             type="text"
             placeholder="Username"
             errorMsg={authError.name}
@@ -51,7 +51,7 @@ class SignUp extends PureComponent {
 
           <Field
             name="email"
-            component={RenderField}
+            component={TextField}
             type="email"
             label="login:email"
             onChange={clearError}
@@ -62,7 +62,7 @@ class SignUp extends PureComponent {
 
           <Field
             name="password"
-            component={RenderField}
+            component={TextField}
             type="password"
             label="login:password"
             placeholder="Password"

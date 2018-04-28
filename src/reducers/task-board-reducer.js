@@ -1,17 +1,17 @@
 import { taskboardActionTypes } from './actions/types';
 
-const { TOGGLE_CREATE_TASK_DIALOG } = taskboardActionTypes;
+const { TOGGLE_ADD_TASK_DIALOG } = taskboardActionTypes;
 
 const INITIAL_STATE = {
-  openCreateTaskDialog: false,
+  openAddTaskDialog: false,
   tasks: {}
 };
 
 const taskboardReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case TOGGLE_CREATE_TASK_DIALOG: {
-      const { openCreateTaskDialog } = state;
-      return state.setIn(['openCreateTaskDialog'], !openCreateTaskDialog);
+    case TOGGLE_ADD_TASK_DIALOG: {
+      const { openAddTaskDialog } = state;
+      return state.setIn(['openAddTaskDialog'], !openAddTaskDialog);
     }
     default: {
       return state;

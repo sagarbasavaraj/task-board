@@ -10,5 +10,5 @@ export const loginActionTypes = {
 };
 
 export const taskboardActionTypes = {
-  TOGGLE_CREATE_TASK_DIALOG: `${taskboardNs}.toggleCreateTaskDialog`
+  TOGGLE_ADD_TASK_DIALOG: `${taskboardNs}.toggleAddTaskDialog`
 };

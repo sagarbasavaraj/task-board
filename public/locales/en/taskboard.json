@@ -1,5 +1,16 @@
 {
   "addTask": "Add Task",
   "title": "Title",
-  "description": "Description"
+  "description": "Description",
+  "priority": "Priority",
+  "status": "Status",
+  "createdOn": "Created on",
+  "updatedOn": "Updated on",
+  "high": "High",
+  "medium": "Medium",
+  "low": "Low",
+  "new": "New",
+  "inProgress": "InProgress",
+  "review": "Review",
+  "complete": "Complete"
 }

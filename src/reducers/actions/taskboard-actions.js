@@ -1,9 +1,9 @@
 import { taskboardActionTypes } from './types';
 
-const { TOGGLE_CREATE_TASK_DIALOG } = taskboardActionTypes;
+const { TOGGLE_ADD_TASK_DIALOG } = taskboardActionTypes;
 
-const toggleCreateTaskDialog = () => ({
-  type: TOGGLE_CREATE_TASK_DIALOG
+const toggleAddTaskDialog = () => ({
+  type: TOGGLE_ADD_TASK_DIALOG
 });
 
-export const taskboardActions = { toggleCreateTaskDialog };
+export const taskboardActions = { toggleAddTaskDialog };
