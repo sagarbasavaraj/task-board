@@ -12,5 +12,6 @@
   "new": "New",
   "inProgress": "InProgress",
   "review": "Review",
-  "complete": "Complete"
+  "complete": "Complete",
+  "noTasks": "No Tasks"
 }

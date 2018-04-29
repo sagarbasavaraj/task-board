@@ -1,40 +1,60 @@
 import React, { Component } from 'react';
 import { object, func } from 'prop-types';
 import { connect } from 'react-redux';
+import { isEmpty } from 'lodash';
 
-import { Container, Icon } from '../common';
+import { Container } from '../common';
 
-import { taskboardActions } from '../reducers/actions/taskboard-actions';
+import {
+  toggleAddTaskDialog,
+  startAddTask
+} from '../reducers/actions/taskboard-actions';
 
+import TaskboardHeader from './taskboard-header';
 import AddTask from './add-task';
+import NoTasks from './no-tasks';
+
 import './taskboard.css';
 
 class Taskboard extends Component {
   static propTypes = {
     taskboard: object.isRequired,
-    toggleAddTaskDialog: func.isRequired
+    dispatch: func.isRequired
   };
 
+  constructor(props) {
+    super(props);
+    this.toggleAddTaskDialog = this.toggleAddTaskDialog.bind(this);
+    this.handleTaskSubmit = this.handleTaskSubmit.bind(this);
+  }
+
+  handleTaskSubmit(task) {
+    this.props.dispatch(startAddTask(task));
+  }
+
+  toggleAddTaskDialog() {
+    this.props.dispatch(toggleAddTaskDialog());
+  }
+
   render() {
-    const { taskboard, toggleAddTaskDialog } = this.props;
-    const { openAddTaskDialog } = taskboard;
+    const { taskboard } = this.props;
+    const { openAddTaskDialog, tasks } = taskboard;
+    const tasksExist = !isEmpty(tasks);
+
     return (
       <Container>
-        <Icon
-          className="l-add-icon"
-          name="add_circle"
-          onClick={toggleAddTaskDialog}
-          style={{ fontSize: '48px' }}
+        <TaskboardHeader onAddBtnClick={this.toggleAddTaskDialog} />
+        <AddTask
+          open={openAddTaskDialog}
+          closeDialog={this.toggleAddTaskDialog}
+          onTaskSubmit={this.handleTaskSubmit}
         />
-        <AddTask open={openAddTaskDialog} closeDialog={toggleAddTaskDialog} />
+        {!tasksExist ? <NoTasks /> : null}
       </Container>
     );
   }
 }
 
-export default connect(
-  state => ({
-    taskboard: state.taskboard
-  }),
-  taskboardActions
-)(Taskboard);
+export default connect(state => ({
+  taskboard: state.taskboard
+}))(Taskboard);

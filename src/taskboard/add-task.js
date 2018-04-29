@@ -40,19 +40,15 @@ const statusOptions = [
 
 class AddTask extends PureComponent {
   static propTypes = {
-    closeDialog: func,
-    open: bool
+    closeDialog: func.isRequired,
+    open: bool,
+    onTaskSubmit: func.isRequired
   };
 
   constructor(props) {
     super(props);
     this.handleCloseDialog = this.handleCloseDialog.bind(this);
     this.handleSubmitBtnClick = this.handleSubmitBtnClick.bind(this);
-  }
-
-  componentWillUnmount() {
-    this.props.clearFields();
-    this.props.reset();
   }
 
   closeAndResetForm() {
@@ -65,9 +61,8 @@ class AddTask extends PureComponent {
   }
 
   handleSubmitBtnClick(taskData) {
-    console.log(taskData);
+    this.props.onTaskSubmit(taskData);
     this.handleCloseDialog();
-    //call service and store the data
   }
 
   render() {
@@ -95,6 +90,7 @@ class AddTask extends PureComponent {
         open={open}
         autoScrollBodyContent
         modal={false}
+        bodyClassName="l-add-task-dialog"
       >
         <form autoComplete="off">
           <Field

@@ -1,5 +1,15 @@
-.l-add-icon {
-  display: inline-flex;
-  font-size: 48px;
-  float: right;
+.l-add-btn {
+  margin-left: 15px;
+}
+
+.l-no-tasks {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 4em;
+}
+
+.l-add-task-dialog {
+  transform: translate(0, 20px);
 }
