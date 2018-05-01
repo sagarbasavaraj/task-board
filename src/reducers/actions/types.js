@@ -11,5 +11,7 @@ export const loginActionTypes = {
 
 export const taskboardActionTypes = {
   TOGGLE_ADD_TASK_DIALOG: `${taskboardNs}.toggleAddTaskDialog`,
-  ADD_TASK: `${taskboardNs}.addTask`
+  ADD_TASK: `${taskboardNs}.addTask`,
+  REMOVE_TASK: `${taskboardNs}.removeTask`,
+  REST_TASKBOARD: `${taskboardNs}.resetTaskboard`
 };

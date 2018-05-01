@@ -3,7 +3,7 @@ import { object, func } from 'prop-types';
 import { connect } from 'react-redux';
 import { isEmpty } from 'lodash';
 
-import { Container } from '../common';
+import { Container, Table } from '../common';
 
 import {
   toggleAddTaskDialog,
@@ -40,6 +40,13 @@ class Taskboard extends Component {
     const { taskboard } = this.props;
     const { openAddTaskDialog, tasks } = taskboard;
     const tasksExist = !isEmpty(tasks);
+    const headerItems = [
+      { m: 'taskboard:title', key: 'title' },
+      { m: 'taskboard:priority', key: 'priority' },
+      { m: 'taskboard:status', key: 'status' },
+      { m: 'taskboard:createdOn', key: 'createdOn' },
+      { m: 'taskboard:description', key: 'description' }
+    ];
 
     return (
       <Container>
@@ -49,7 +56,18 @@ class Taskboard extends Component {
           closeDialog={this.toggleAddTaskDialog}
           onTaskSubmit={this.handleTaskSubmit}
         />
-        {!tasksExist ? <NoTasks /> : null}
+        {!tasksExist ? (
+          <NoTasks />
+        ) : (
+          <Table
+            headerItems={headerItems}
+            tableData={tasks}
+            selectable
+            deselectOnClickaway
+            showCheckboxes
+            height="60vh"
+          />
+        )}
       </Container>
     );
   }

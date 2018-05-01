@@ -8,6 +8,10 @@ import { store } from '../store/store';
 import AppRoutes from '../routes/routes';
 
 import { onSignIn, onSignOut } from '../reducers/actions/login-actions';
+import {
+  subscribeDataListeners,
+  unsubcribeDataListeners
+} from '../reducers/actions/taskboard-actions';
 
 class App extends Component {
   componentDidMount() {
@@ -15,10 +19,12 @@ class App extends Component {
       if (user) {
         // User is signed in.
         store.dispatch(onSignIn(user));
+        store.dispatch(subscribeDataListeners(user.uid));
         store.dispatch(push('/taskboard'));
       } else {
         // No user is signed in.
         store.dispatch(onSignOut());
+        store.dispatch(unsubcribeDataListeners());
         store.dispatch(push('/'));
       }
     });

@@ -7,6 +7,7 @@ import Icon from './icon/icon';
 import { Span } from './typography/inline-text-elements';
 import Dialog from './dialog';
 import SelectField from './render-select-field';
+import Table from './custom-table';
 
 export {
   Header,
@@ -17,5 +18,6 @@ export {
   Button,
   Container,
   Icon,
-  Dialog
+  Dialog,
+  Table
 };

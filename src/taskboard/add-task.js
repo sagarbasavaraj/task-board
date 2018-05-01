@@ -7,34 +7,34 @@ import { Button, Dialog, TextField, SelectField } from '../common';
 const priorityOptions = [
   {
     label: 'taskboard:high',
-    value: 'high'
+    value: 'High'
   },
   {
     label: 'taskboard:medium',
-    value: 'medium'
+    value: 'Medium'
   },
   {
     label: 'taskboard:low',
-    value: 'low'
+    value: 'Low'
   }
 ];
 
 const statusOptions = [
   {
     label: 'taskboard:new',
-    value: 'new'
+    value: 'New'
   },
   {
     label: 'taskboard:inProgress',
-    value: 'inProgress'
+    value: 'In Progress'
   },
   {
     label: 'taskboard:review',
-    value: 'review'
+    value: 'Review'
   },
   {
     label: 'taskboard:complete',
-    value: 'complete'
+    value: 'Complete'
   }
 ];
 
