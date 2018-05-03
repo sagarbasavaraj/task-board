@@ -38,7 +38,7 @@ const statusOptions = [
   }
 ];
 
-class AddTask extends PureComponent {
+class Task extends PureComponent {
   static propTypes = {
     closeDialog: func.isRequired,
     open: bool,
@@ -90,7 +90,7 @@ class AddTask extends PureComponent {
         open={open}
         autoScrollBodyContent
         modal={false}
-        bodyClassName="l-add-task-dialog"
+        bodyClassName="l-task-dialog"
       >
         <form autoComplete="off">
           <Field
@@ -127,4 +127,4 @@ class AddTask extends PureComponent {
   }
 }
 
-export default reduxForm({ form: 'addTask' })(AddTask);
+export default reduxForm({ form: 'Task' })(Task);

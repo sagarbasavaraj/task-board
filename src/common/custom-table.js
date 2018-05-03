@@ -21,12 +21,15 @@ const renderTableHeaderColumns = (t, headerItems) => {
   });
 };
 
-const renderTableRowColumn = (headerItems, tableData) => {
-  return map(tableData, data => {
+const renderTableRowColumn = (headerItems, tableData, selectedRow) => {
+  return map(tableData, (data, key) => {
     return (
-      <TableRow key={data.id}>
+      <TableRow key={key} selected={selectedRow === key}>
         {map(headerItems, header => (
-          <TableRowColumn key={`${data.id} ${header.key}`}>
+          <TableRowColumn
+            key={`${data.id} ${header.key}`}
+            data-row-data={`${data.id}`}
+          >
             {data[header.key]}
           </TableRowColumn>
         ))}
@@ -49,7 +52,10 @@ const CustomTabel = ({
   tableData,
   showRowHover,
   stripedRows,
-  showCheckboxes
+  showCheckboxes,
+  onCellClick,
+  onRowSelection,
+  selectedRow
 }) => {
   return (
     <div className={className}>
@@ -57,6 +63,8 @@ const CustomTabel = ({
         height={height}
         selectable={selectable}
         multiSelectable={multiSelectable}
+        onCellClick={onCellClick}
+        onRowSelection={onRowSelection}
       >
         <TableHeader
           displaySelectAll={showCheckboxes}
@@ -71,7 +79,7 @@ const CustomTabel = ({
           showRowHover={showRowHover}
           stripedRows={stripedRows}
         >
-          {renderTableRowColumn(headerItems, tableData)}
+          {renderTableRowColumn(headerItems, tableData, selectedRow)}
         </TableBody>
       </Table>
     </div>

@@ -13,5 +13,7 @@
   "inProgress": "In Progress",
   "review": "Review",
   "complete": "Complete",
-  "noTasks": "No Tasks"
+  "noTasks": "No Tasks",
+  "create": "Create",
+  "delete": "Delete"
 }

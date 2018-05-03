@@ -4,23 +4,29 @@ import database from '../../firebase/firebase';
 import { taskboardActionTypes } from './types';
 
 const {
-  TOGGLE_ADD_TASK_DIALOG,
-  ADD_TASK,
+  TOGGLE_TASK_DIALOG,
+  SET_TASK,
   REMOVE_TASK,
-  REST_TASKBOARD
+  RESET_TASKBOARD,
+  SET_SELECTED_TASK
 } = taskboardActionTypes;
 
-const addTask = task => ({ type: ADD_TASK, payload: { task } });
+const setTask = task => ({ type: SET_TASK, payload: { task } });
 const removeTask = taskId => ({ type: REMOVE_TASK, payload: { taskId } });
-const resetTaskbaord = () => ({ type: REST_TASKBOARD });
+const resetTaskbaord = () => ({ type: RESET_TASKBOARD });
+
+export const setSelectedTaskId = taskId => ({
+  type: SET_SELECTED_TASK,
+  payload: { taskId }
+});
 
 let tasksRef;
 
-export const toggleAddTaskDialog = () => ({
-  type: TOGGLE_ADD_TASK_DIALOG
+export const toggleTaskDialog = () => ({
+  type: TOGGLE_TASK_DIALOG
 });
 
-export const startAddTask = (task = {}) => async (dispatch, getState) => {
+export const startSetTask = (task = {}) => async (dispatch, getState) => {
   const { uid } = getState().login.user;
   const { title, priority, status, description } = task;
   const createdOn = moment().format('MMM Do YY');
@@ -43,12 +49,12 @@ export const subscribeDataListeners = uid => (dispatch, getState) => {
   tasksRef.on('child_added', function(snapshot) {
     const data = snapshot.val();
     const createdOn = moment().format('MMM Do YY');
-    dispatch(addTask({ id: snapshot.key, createdOn, ...data }));
+    dispatch(setTask({ id: snapshot.key, createdOn, ...data }));
   });
 
   tasksRef.on('child_changed', function(snapshot) {
     const data = snapshot.val();
-    dispatch(addTask({ id: snapshot.key, ...data }));
+    dispatch(setTask({ id: snapshot.key, ...data }));
   });
 
   tasksRef.on('child_removed', function(data) {
@@ -61,4 +67,14 @@ export const unsubcribeDataListeners = () => dispatch => {
     tasksRef.off();
   }
   dispatch(resetTaskbaord());
+};
+
+export const deleteTask = taskId => async (dispatch, getState) => {
+  const { uid } = getState().login.user;
+  const taskRef = database.ref(`users/${uid}/tasks/${taskId}`);
+  try {
+    await taskRef.remove();
+  } catch (error) {
+    console.log(error);
+  }
 };

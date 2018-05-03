@@ -3,16 +3,19 @@ import { object, func } from 'prop-types';
 import { connect } from 'react-redux';
 import { isEmpty } from 'lodash';
 
-import { Container, Table } from '../common';
+import { Container } from '../common';
 
 import {
-  toggleAddTaskDialog,
-  startAddTask
+  toggleTaskDialog,
+  startSetTask,
+  setSelectedTaskId,
+  deleteTask
 } from '../reducers/actions/taskboard-actions';
 
 import TaskboardHeader from './taskboard-header';
-import AddTask from './add-task';
+import Task from './task';
 import NoTasks from './no-tasks';
+import ViewTasks from './view-tasks';
 
 import './taskboard.css';
 
@@ -24,49 +27,54 @@ class Taskboard extends Component {
 
   constructor(props) {
     super(props);
-    this.toggleAddTaskDialog = this.toggleAddTaskDialog.bind(this);
+    this.toggleTaskDialog = this.toggleTaskDialog.bind(this);
     this.handleTaskSubmit = this.handleTaskSubmit.bind(this);
+    this.handleTaskSelect = this.handleTaskSelect.bind(this);
+    this.handleDeleteBtnClick = this.handleDeleteBtnClick.bind(this);
   }
 
   handleTaskSubmit(task) {
-    this.props.dispatch(startAddTask(task));
+    this.props.dispatch(startSetTask(task));
   }
 
-  toggleAddTaskDialog() {
-    this.props.dispatch(toggleAddTaskDialog());
+  toggleTaskDialog() {
+    this.props.dispatch(toggleTaskDialog());
+  }
+
+  handleTaskSelect(taskId) {
+    this.props.dispatch(setSelectedTaskId(taskId));
+  }
+
+  handleDeleteBtnClick() {
+    const { taskboard } = this.props;
+    this.props.dispatch(deleteTask(taskboard.selectedTaskId));
   }
 
   render() {
     const { taskboard } = this.props;
-    const { openAddTaskDialog, tasks } = taskboard;
+    const { openTaskDialog, tasks, selectedTaskId } = taskboard;
     const tasksExist = !isEmpty(tasks);
-    const headerItems = [
-      { m: 'taskboard:title', key: 'title' },
-      { m: 'taskboard:priority', key: 'priority' },
-      { m: 'taskboard:status', key: 'status' },
-      { m: 'taskboard:createdOn', key: 'createdOn' },
-      { m: 'taskboard:description', key: 'description' }
-    ];
 
     return (
       <Container>
-        <TaskboardHeader onAddBtnClick={this.toggleAddTaskDialog} />
-        <AddTask
-          open={openAddTaskDialog}
-          closeDialog={this.toggleAddTaskDialog}
+        <TaskboardHeader
+          onAddBtnClick={this.toggleTaskDialog}
+          onDeleteBtnClick={this.handleDeleteBtnClick}
+          disableDeleteBtn={!selectedTaskId}
+        />
+        <Task
+          open={openTaskDialog}
+          closeDialog={this.toggleTaskDialog}
           onTaskSubmit={this.handleTaskSubmit}
         />
-        {!tasksExist ? (
-          <NoTasks />
-        ) : (
-          <Table
-            headerItems={headerItems}
-            tableData={tasks}
-            selectable
-            deselectOnClickaway
-            showCheckboxes
-            height="60vh"
+        {tasksExist ? (
+          <ViewTasks
+            tasks={tasks}
+            onTaskSelect={this.handleTaskSelect}
+            selectedTaskId={selectedTaskId}
           />
+        ) : (
+          <NoTasks />
         )}
       </Container>
     );
