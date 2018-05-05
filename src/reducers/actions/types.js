@@ -14,5 +14,6 @@ export const taskboardActionTypes = {
   SET_TASK: `${taskboardNs}.setTask`,
   REMOVE_TASK: `${taskboardNs}.removeTask`,
   RESET_TASKBOARD: `${taskboardNs}.resetTaskboard`,
-  SET_SELECTED_TASK: `${taskboardNs}.setSelectedTask`
+  SET_SELECTED_TASK: `${taskboardNs}.setSelectedTask`,
+  UPDATE_TASK: `${taskboardNs}.updateTask`
 };

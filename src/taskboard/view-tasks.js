@@ -34,6 +34,7 @@ class ViewTasks extends Component {
       { m: 'taskboard:priority', key: 'priority' },
       { m: 'taskboard:status', key: 'status' },
       { m: 'taskboard:createdOn', key: 'createdOn' },
+      { m: 'taskboard:updatedOn', key: 'updatedOn' },
       { m: 'taskboard:description', key: 'description' }
     ];
 

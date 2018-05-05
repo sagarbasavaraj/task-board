@@ -9,7 +9,8 @@ import {
   toggleTaskDialog,
   startSetTask,
   setSelectedTaskId,
-  deleteTask
+  deleteTask,
+  startUpdateTask
 } from '../reducers/actions/taskboard-actions';
 
 import TaskboardHeader from './taskboard-header';
@@ -27,17 +28,33 @@ class Taskboard extends Component {
 
   constructor(props) {
     super(props);
-    this.toggleTaskDialog = this.toggleTaskDialog.bind(this);
+    this.closeTaskDialog = this.closeTaskDialog.bind(this);
     this.handleTaskSubmit = this.handleTaskSubmit.bind(this);
     this.handleTaskSelect = this.handleTaskSelect.bind(this);
     this.handleDeleteBtnClick = this.handleDeleteBtnClick.bind(this);
+    this.handleAddBtnClick = this.handleAddBtnClick.bind(this);
+    this.handleUpdateBtnClick = this.handleUpdateBtnClick.bind(this);
   }
 
   handleTaskSubmit(task) {
-    this.props.dispatch(startSetTask(task));
+    const { taskboard } = this.props;
+    const { actionType, selectedTaskId } = taskboard;
+    if (actionType === 'add') {
+      this.props.dispatch(startSetTask(task));
+    } else if (actionType === 'update') {
+      this.props.dispatch(startUpdateTask(selectedTaskId, task));
+    }
   }
 
-  toggleTaskDialog() {
+  handleAddBtnClick() {
+    this.props.dispatch(toggleTaskDialog('add'));
+  }
+
+  handleUpdateBtnClick() {
+    this.props.dispatch(toggleTaskDialog('update'));
+  }
+
+  closeTaskDialog(type) {
     this.props.dispatch(toggleTaskDialog());
   }
 
@@ -52,19 +69,20 @@ class Taskboard extends Component {
 
   render() {
     const { taskboard } = this.props;
-    const { openTaskDialog, tasks, selectedTaskId } = taskboard;
+    const { tasks, selectedTaskId } = taskboard;
     const tasksExist = !isEmpty(tasks);
 
     return (
       <Container>
         <TaskboardHeader
-          onAddBtnClick={this.toggleTaskDialog}
+          onAddBtnClick={this.handleAddBtnClick}
           onDeleteBtnClick={this.handleDeleteBtnClick}
           disableDeleteBtn={!selectedTaskId}
+          onUpdateBtnClick={this.handleUpdateBtnClick}
+          disableUpdateBtn={!selectedTaskId}
         />
         <Task
-          open={openTaskDialog}
-          closeDialog={this.toggleTaskDialog}
+          closeDialog={this.closeTaskDialog}
           onTaskSubmit={this.handleTaskSubmit}
         />
         {tasksExist ? (

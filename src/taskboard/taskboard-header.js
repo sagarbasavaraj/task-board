@@ -7,7 +7,9 @@ import { Button, Icon } from '../common';
 const TaskboardHeader = ({
   onAddBtnClick,
   onDeleteBtnClick,
-  disableDeleteBtn
+  onUpdateBtnClick,
+  disableDeleteBtn,
+  disableUpdateBtn
 }) => {
   return (
     <Toolbar>
@@ -27,6 +29,14 @@ const TaskboardHeader = ({
           disabled={disableDeleteBtn}
           icon={<Icon name="delete" />}
         />
+        <Button
+          className="l-btn"
+          msg="taskboard:update"
+          primary={true}
+          onClick={onUpdateBtnClick}
+          disabled={disableUpdateBtn}
+          icon={<Icon name="edit" />}
+        />
       </ToolbarGroup>
     </Toolbar>
   );
@@ -35,7 +45,9 @@ const TaskboardHeader = ({
 TaskboardHeader.propTypes = {
   onAddBtnClick: func.isRequired,
   onDeleteBtnClick: func.isRequired,
-  disableDeleteBtn: bool
+  disableDeleteBtn: bool,
+  onUpdateBtnClick: func.isRequired,
+  disableUpdateBtn: bool
 };
 
 export default TaskboardHeader;

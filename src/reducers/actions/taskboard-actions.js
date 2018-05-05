@@ -3,17 +3,22 @@ import database from '../../firebase/firebase';
 
 import { taskboardActionTypes } from './types';
 
+//TODO general add logging
+//Handle Errors
+
 const {
   TOGGLE_TASK_DIALOG,
   SET_TASK,
   REMOVE_TASK,
   RESET_TASKBOARD,
-  SET_SELECTED_TASK
+  SET_SELECTED_TASK,
+  UPDATE_TASK
 } = taskboardActionTypes;
 
 const setTask = task => ({ type: SET_TASK, payload: { task } });
 const removeTask = taskId => ({ type: REMOVE_TASK, payload: { taskId } });
 const resetTaskbaord = () => ({ type: RESET_TASKBOARD });
+const updateTask = task => ({ type: UPDATE_TASK, payload: { task } });
 
 export const setSelectedTaskId = taskId => ({
   type: SET_SELECTED_TASK,
@@ -22,8 +27,9 @@ export const setSelectedTaskId = taskId => ({
 
 let tasksRef;
 
-export const toggleTaskDialog = () => ({
-  type: TOGGLE_TASK_DIALOG
+export const toggleTaskDialog = actionType => ({
+  type: TOGGLE_TASK_DIALOG,
+  payload: { actionType }
 });
 
 export const startSetTask = (task = {}) => async (dispatch, getState) => {
@@ -43,6 +49,21 @@ export const startSetTask = (task = {}) => async (dispatch, getState) => {
   }
 };
 
+export const startUpdateTask = (selectedTaskId, task = {}) => async (
+  dispatch,
+  getState
+) => {
+  const { uid } = getState().login.user;
+  const updatedOn = moment().format('MMM Do YY');
+  try {
+    await database
+      .ref(`users/${uid}/tasks/${selectedTaskId}`)
+      .update({ ...task, updatedOn });
+  } catch (e) {
+    console.log(e);
+  }
+};
+
 export const subscribeDataListeners = uid => (dispatch, getState) => {
   tasksRef = database.ref(`users/${uid}/tasks`);
 
@@ -54,7 +75,7 @@ export const subscribeDataListeners = uid => (dispatch, getState) => {
 
   tasksRef.on('child_changed', function(snapshot) {
     const data = snapshot.val();
-    dispatch(setTask({ id: snapshot.key, ...data }));
+    dispatch(updateTask({ id: snapshot.key, ...data }));
   });
 
   tasksRef.on('child_removed', function(data) {

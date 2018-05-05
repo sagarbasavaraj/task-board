@@ -15,5 +15,7 @@
   "complete": "Complete",
   "noTasks": "No Tasks",
   "create": "Create",
-  "delete": "Delete"
+  "delete": "Delete",
+  "update": "Update",
+  "updateTask": "Update Task"
 }

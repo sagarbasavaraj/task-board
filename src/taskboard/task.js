@@ -1,5 +1,7 @@
 import React, { PureComponent } from 'react';
-import { func, bool } from 'prop-types';
+import { connect } from 'react-redux';
+import { get } from 'lodash';
+import { func, bool, object, string } from 'prop-types';
 import { reduxForm, Field } from 'redux-form';
 
 import { Button, Dialog, TextField, SelectField } from '../common';
@@ -38,11 +40,26 @@ const statusOptions = [
   }
 ];
 
+const getTitle = actionType => {
+  switch (actionType) {
+    case 'add': {
+      return 'taskboard:addTask';
+    }
+    case 'update': {
+      return 'taskboard:updateTask';
+    }
+    default:
+      return '';
+  }
+};
+
 class Task extends PureComponent {
   static propTypes = {
     closeDialog: func.isRequired,
     open: bool,
-    onTaskSubmit: func.isRequired
+    onTaskSubmit: func.isRequired,
+    initialValues: object,
+    actionType: string
   };
 
   constructor(props) {
@@ -66,7 +83,7 @@ class Task extends PureComponent {
   }
 
   render() {
-    const { open, pristine, submitting, handleSubmit } = this.props;
+    const { open, pristine, submitting, handleSubmit, actionType } = this.props;
     const actions = [
       <Button
         msg="cancel"
@@ -85,7 +102,7 @@ class Task extends PureComponent {
     ];
     return (
       <Dialog
-        msg="taskboard:addTask"
+        msg={getTitle(actionType)}
         actions={actions}
         open={open}
         autoScrollBodyContent
@@ -127,4 +144,14 @@ class Task extends PureComponent {
   }
 }
 
-export default reduxForm({ form: 'Task' })(Task);
+export default connect(state => {
+  const { taskboard } = state;
+  const { actionType, openTaskDialog, selectedTaskId } = taskboard;
+  const initialValues =
+    actionType === 'update' ? get(taskboard, `tasks.${selectedTaskId}`) : {};
+  return {
+    open: openTaskDialog,
+    initialValues,
+    actionType
+  };
+})(reduxForm({ form: 'Task', enableReinitialize: true })(Task));
