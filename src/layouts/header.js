@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
+import { object, func } from 'prop-types';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import { Navbar, NavItem, Nav } from 'react-bootstrap/lib';
@@ -13,7 +13,8 @@ import './header.css';
 
 class Header extends PureComponent {
   static propTypes = {
-    user: PropTypes.object
+    user: object,
+    dispatch: func
   };
 
   constructor(props) {
@@ -22,11 +23,11 @@ class Header extends PureComponent {
   }
 
   navigate(eventKey, event) {
-    const { push } = this.props;
+    const { dispatch } = this.props;
     if (eventKey === 1) {
-      push('/login');
+      dispatch(push('/login'));
     } else if (eventKey === 2) {
-      push('/join');
+      dispatch(push('/join'));
     }
   }
 
@@ -62,9 +63,6 @@ class Header extends PureComponent {
   }
 }
 
-export default connect(
-  state => ({
-    user: state.login.user
-  }),
-  { push }
-)(Header);
+export default connect(state => ({
+  user: state.login.user
+}))(Header);

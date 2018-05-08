@@ -16,7 +16,7 @@ Button.propTypes = {
   t: PropTypes.func.isRequired,
   msg: PropTypes.string,
   text: PropTypes.string,
-  restProps: PropTypes.any,
+  restProps: PropTypes.object,
   btnType: PropTypes.string
 };
 

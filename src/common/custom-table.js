@@ -1,5 +1,14 @@
 import React from 'react';
 import {
+  func,
+  string,
+  bool,
+  oneOfType,
+  arrayOf,
+  object,
+  number
+} from 'prop-types';
+import {
   Table,
   TableBody,
   TableHeaderColumn,
@@ -44,8 +53,6 @@ const CustomTabel = ({
   height,
   selectable,
   multiSelectable,
-  displaySelectAll,
-  adjustForCheckbox,
   enableSelectAll,
   headerItems,
   deselectOnClickaway,
@@ -84,6 +91,25 @@ const CustomTabel = ({
       </Table>
     </div>
   );
+};
+
+CustomTabel.propTypes = {
+  t: func,
+  className: string,
+  height: oneOfType([string, number]),
+  selectable: bool,
+  multiSelectable: bool,
+  displaySelectAll: bool,
+  enableSelectAll: bool,
+  headerItems: arrayOf(object),
+  deselectOnClickaway: bool,
+  tableData: object,
+  showRowHover: bool,
+  stripedRows: bool,
+  showCheckboxes: bool,
+  onCellClick: func,
+  onRowSelection: func,
+  selectedRow: string
 };
 
 export default withTranslate(CustomTabel);

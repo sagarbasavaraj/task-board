@@ -1,10 +1,25 @@
 import React from 'react';
+import { func, string } from 'prop-types';
 
 import { resolveDisplayText } from '../../helpers/resolveDisplayText';
 
 import withTranslate from '../with-translate';
 
-export const Span = withTranslate(({ t, msg, text, className }) => {
+const Span = ({ t, msg, text, className }) => {
   const displayText = resolveDisplayText(t, msg, text);
-  return <span>{displayText}</span>;
-});
+  return <span className={className}>{displayText}</span>;
+};
+
+Span.propTypes = {
+  t: func.isRequired,
+  text: string,
+  msg: string,
+  className: string
+};
+
+Span.defaultProps = {
+  text: '',
+  msg: ''
+};
+
+export default withTranslate(Span);

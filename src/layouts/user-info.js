@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
+import { object, string, func } from 'prop-types';
 import { connect } from 'react-redux';
 
 //Material UI components
@@ -15,9 +15,9 @@ import { signOutUser } from '../reducers/actions/login-actions';
 
 class UserInfo extends PureComponent {
   static propTypes = {
-    user: PropTypes.object,
-    className: PropTypes.string,
-    signOutUser: PropTypes.func.isRequired
+    user: object,
+    className: string,
+    dispatch: func.isRequired
   };
 
   constructor(props) {
@@ -26,10 +26,10 @@ class UserInfo extends PureComponent {
   }
 
   handleMenuItemChange(event, value) {
-    const { signOutUser } = this.props;
+    const { dispatch } = this.props;
     switch (value) {
       case 'logout': {
-        signOutUser();
+        dispatch(signOutUser());
         break;
       }
       default:
@@ -62,4 +62,4 @@ class UserInfo extends PureComponent {
   }
 }
 
-export default connect(undefined, { signOutUser })(UserInfo);
+export default connect()(UserInfo);

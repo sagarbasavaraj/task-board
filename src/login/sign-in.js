@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import { object, func } from 'prop-types';
 import { reduxForm, Field, SubmissionError } from 'redux-form';
 import { connect } from 'react-redux';
 import { isEmpty } from 'lodash';
@@ -8,35 +9,39 @@ import { signInUser, clearError } from '../reducers/actions/login-actions';
 import './login.css';
 
 import { TextField, Button } from '../common';
-import { emailVaidator, validateForm } from './validation';
+import { emailValidator, validateForm } from './validation';
 
 class SignIn extends PureComponent {
+  static propTypes = {
+    authError: object,
+    dispatch: func
+  };
+
   constructor(props) {
     super(props);
     this.handleSignIn = this.handleSignIn.bind(this);
+    this._clearError = this._clearError.bind(this);
   }
 
   componentWillUnmount() {
-    this.props.clearError();
+    this._clearError();
   }
 
   handleSignIn(userCredentials) {
     const errors = validateForm(userCredentials);
     if (isEmpty(errors)) {
-      this.props.signInUser(userCredentials);
+      this.props.dispatch(signInUser(userCredentials));
     } else {
       throw new SubmissionError(errors);
     }
   }
 
+  _clearError() {
+    this.props.dispatch(clearError());
+  }
+
   render() {
-    const {
-      handleSubmit,
-      pristine,
-      submitting,
-      authError,
-      clearError
-    } = this.props;
+    const { handleSubmit, pristine, submitting, authError } = this.props;
 
     return (
       <div className="l-signin-container">
@@ -46,9 +51,9 @@ class SignIn extends PureComponent {
             label="login:email"
             component={TextField}
             type="text"
-            onChange={clearError}
+            onChange={this._clearError}
             errorMsg={authError.email}
-            validate={[emailVaidator]}
+            validate={[emailValidator]}
           />
 
           <Field
@@ -56,7 +61,7 @@ class SignIn extends PureComponent {
             component={TextField}
             type="password"
             label="login:password"
-            onChange={clearError}
+            onChange={this._clearError}
             errorMsg={authError.password}
           />
           <div>
@@ -76,8 +81,5 @@ class SignIn extends PureComponent {
 }
 
 export default reduxForm({ form: 'SignIn' })(
-  connect(state => ({ authError: state.login.authError || {} }), {
-    signInUser,
-    clearError
-  })(SignIn)
+  connect(state => ({ authError: state.login.authError || {} }))(SignIn)
 );
