@@ -1,13 +1,8 @@
 import React from 'react';
-import { configure, shallow } from 'enzyme';
+import { shallow } from 'enzyme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-import Adapter from 'enzyme-adapter-react-16';
-
-import '../../../__mocks__/reacti18nextMock';
 import { Dialog } from '../../common';
-
-configure({ adapter: new Adapter() });
 
 describe('<Dialog />', () => {
   it('should render MuiDialog element', () => {

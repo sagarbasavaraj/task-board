@@ -1,12 +1,8 @@
 import React from 'react';
-import { configure, mount } from 'enzyme';
+import { mount } from 'enzyme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import Adapter from 'enzyme-adapter-react-16';
 
-import '../../../__mocks__/reacti18nextMock';
 import { Button } from '../../common';
-
-configure({ adapter: new Adapter() });
 
 describe('<Button />', () => {
   it('should render button element', () => {

@@ -1,11 +1,6 @@
 import { setSelectedTaskId, toggleTaskDialog } from './taskboard-actions';
 import { taskboardActionTypes } from './types';
 
-jest.mock('firebase', () => ({
-  initializeApp: () => {},
-  database: () => {}
-}));
-
 describe('Taskboard actions', () => {
   it('should setup set selected taskId action object', () => {
     const action = setSelectedTaskId(1);
