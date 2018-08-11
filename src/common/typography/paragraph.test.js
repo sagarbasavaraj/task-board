@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { Paragraph } from '../../../common';
+import Paragraph from './paragraph';
 
 describe('<Paragraph />', () => {
   it('should render <p/> element', () => {

@@ -2,7 +2,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-import { Button } from '../../common';
+import Button from './button';
 
 describe('<Button />', () => {
   it('should render button element', () => {

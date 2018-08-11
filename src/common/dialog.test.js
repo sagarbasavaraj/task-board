@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-import { Dialog } from '../../common';
+import Dialog from './dialog';
 
 describe('<Dialog />', () => {
   it('should render MuiDialog element', () => {

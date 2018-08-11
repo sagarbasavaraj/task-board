@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { Container } from '../../common';
+import Container from './container';
 
 describe('<Container />', () => {
   it('should render div container element with given class name', () => {

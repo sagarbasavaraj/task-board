@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { Span } from '../../../common';
+import Span from './inline-text-elements';
 
 describe('<Span />', () => {
   it('should render <span/> element', () => {

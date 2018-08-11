@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { Header } from '../../../common';
+import Header from './header';
 
 describe('<Header />', () => {
   it('should render <h1 /> element', () => {
